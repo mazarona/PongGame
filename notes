@@ -1,6 +1,6 @@
 1) Make the ball (initialize its struct)
 2) Update the ball
-3) Render the ball
+3) Render the ball (by calling the renderer fill rect command)
 
 GameObjects.c
     makeCircle
@@ -12,3 +12,5 @@ GameObjects.c
 GameLoop.c
     Draw all of the objects
     void startGame(void);
+
+

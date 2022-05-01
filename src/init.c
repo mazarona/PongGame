@@ -1,4 +1,4 @@
-#include "init.h"
+#include "../include/init.h"
 
 
 static SDL_Window *windowHelper = NULL ;
