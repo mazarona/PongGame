@@ -21,7 +21,7 @@ typedef struct Square{
     int green;
     int blue;
     int alpha;
-    void (*update)(struct Square *);
+    void (*update)(struct Square *, float elapsedTime);
 }Square;
 
 typedef struct Rectangle{
@@ -32,5 +32,8 @@ typedef struct Rectangle{
     float xSpeed;
     float ySpeed;
 }Rectangle;
+
+void createSquare(float x, float y, int size, float xSpeed, float ySpeed,
+        int red, int green, int blue, int alpha, void(*update)(struct Square*));
 
 #endif

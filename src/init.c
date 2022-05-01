@@ -1,6 +1,5 @@
 #include "../include/init.h"
 
-
 static SDL_Window *windowHelper = NULL ;
 static SDL_Renderer *rendererHelper = NULL ;
 static void shutDown(void){
@@ -15,8 +14,8 @@ static void shutDown(void){
 
 bool init(SDL_Window **window,const char *title, int w, int h, Uint32 windowFlags, 
         SDL_Renderer **renderer, Uint32 rendererFlags){
+    // will use rand() in coinFlip function
     srand((unsigned int)time(NULL));
-    // Set shutdown as a callback when exiting
 
     // Initialize SDL
     if (SDL_Init(SDL_INIT_VIDEO) != 0) {
@@ -39,6 +38,7 @@ bool init(SDL_Window **window,const char *title, int w, int h, Uint32 windowFlag
     }
     rendererHelper = *renderer;
 
+    // set shutDown as a callback when exiting
     atexit(shutDown);
     return true;
 }
