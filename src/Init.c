@@ -5,10 +5,10 @@
 
 extern List squares;
 static SDL_Window *windowHelper = NULL;
-static SDL_Renderer *rendererHelper = NULL;
+SDL_Renderer *rendererGlobal = NULL;
 static void shutDown(void){
-    if(rendererHelper){
-        SDL_DestroyRenderer(rendererHelper);
+    if(rendererGlobal){
+        SDL_DestroyRenderer(rendererGlobal);
     }
     if(windowHelper){
         SDL_DestroyWindow(windowHelper);
@@ -44,7 +44,7 @@ bool init(SDL_Window **window,const char *title, int w, int h, Uint32 windowFlag
     if(!renderer){
         return false;
     }
-    rendererHelper = *renderer;
+    rendererGlobal = *renderer;
 
     // set shutDown as a callback when exiting
     atexit(shutDown);

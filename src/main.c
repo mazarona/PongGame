@@ -4,6 +4,7 @@
 #include "../include/GameLoop.h"
 
 
+void updateSquare(Square *sq, float elapsed);
 int main(int argc, const char *argv[]) {
     /* Initialization (window and renderer) */
     SDL_Window *window;
@@ -17,34 +18,14 @@ int main(int argc, const char *argv[]) {
         exit(1);
     }
     /* Create game objects */
-    createSquare
+    createSquare(windowWidth/2, windowHeight/2, 10, 100.0, 100.0, 255,0,0,255,updateSquare);
 
     /* Start the Game */
     startGame();
     return 0;
 }
 
-void updateSquare(Square *sq, float ela)
-{
-
+void updateSquare(Square *sq, float elapsed){
+    sq->x += sq->xSpeed * elapsed;
+    sq->y += sq->ySpeed * elapsed;
 }
-
-
-//void update(float elapsed){
-//    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-//    SDL_RenderClear(renderer);
-//
-//    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-//    /* Swap the background buffer with the front one */
-//    SDL_RenderPresent(renderer);
-//}
-//
-//Ball makeBall(int size)
-//{
-//    const float speed = 120;
-//    Ball ball = {
-//        .x = WINDOW_WIDTH/2 - size/2,
-//        .y = WINDOW_HEIGHT/2 - size/2,
-//        .size = 10,
-//    };
-//}
