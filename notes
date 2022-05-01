@@ -16,3 +16,9 @@ GameLoop.c
 
 TODO:
     -> Use an appropriate datastructure instead of linked lists to keep track of my non-homogeneous game objects.
+
+NOTES:
+    -> The linked list is defined in GameObjects.c (makes sense)
+    -> It is declared as extern in GameLoop.c (to update the objects inside of it before render)
+    -> It is declared as extern in init.c (to destroy the list at shutdown and avoid memory leak)
+

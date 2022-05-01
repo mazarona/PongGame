@@ -1,7 +1,11 @@
-#include "../include/init.h"
+#include <SDL2/SDL.h>
+#include <stdbool.h>
+#include <time.h>
+#include "../include/linked_list.h"
 
-static SDL_Window *windowHelper = NULL ;
-static SDL_Renderer *rendererHelper = NULL ;
+extern List squares;
+static SDL_Window *windowHelper = NULL;
+static SDL_Renderer *rendererHelper = NULL;
 static void shutDown(void){
     if(rendererHelper){
         SDL_DestroyRenderer(rendererHelper);
@@ -9,6 +13,10 @@ static void shutDown(void){
     if(windowHelper){
         SDL_DestroyWindow(windowHelper);
     }
+    if(squares.size != 0){
+        list_destroy(&squares);
+    }
+
     SDL_Quit();
 }
 
