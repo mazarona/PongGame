@@ -12,8 +12,10 @@ void createSquare(float x, float y, int size, float xSpeed, float ySpeed,
 {
     // Initialize the linked list only once
     static bool initialize = false;
-    if(!initialize)
+    if(!initialize){
         list_init(&squares, destroySquares);
+        initialize = true;
+    }
 
     // Create the square and add to the linked list
     // the square will be freed in two cases
