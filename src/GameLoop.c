@@ -1,6 +1,6 @@
 #include <SDL2/SDL.h>
 #include <stdbool.h>
-#include "../include/linked_list.h"
+#include "../include/LinkedList.h"
 #include "../include/GameObjects.h"
 
 extern List squares;

@@ -1,7 +1,7 @@
 #include <SDL2/SDL.h>
 #include <stdbool.h>
 #include <time.h>
-#include "../include/linked_list.h"
+#include "../include/LinkedList.h"
 
 extern List squares;
 static SDL_Window *windowHelper = NULL;

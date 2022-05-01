@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <stdbool.h>
-#include "../include/linked_list.h"
+#include "../include/LinkedList.h"
 #include "../include/GameObjects.h"
 
 /* Keep track of created game objects in a linked list*/
