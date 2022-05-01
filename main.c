@@ -1,31 +1,67 @@
-#include <SDL2/SDL.h>
-#define WIDTH 640
-#define HEIGHT 640
+#include "init.h"
 
-int main(int argc, const char *argv[])
-{
-    if (SDL_Init(SDL_INIT_VIDEO) != 0) {
-        fprintf(stderr, "Failed to initialize SDL: %s\n", SDL_GetError());
+#define WINDOW_WIDTH 640
+#define WINDOW_HEIGHT 480
+
+typedef struct Ball {
+    float x;
+    float y;
+    float xSpeed;
+    float ySpeed;
+    int size;
+}Ball;
+Ball makeBall (int size);
+
+SDL_Window *window;
+SDL_Renderer *renderer;
+int main(int argc, const char *argv[]) {
+    /* Initialization */
+    char *title= "Pong";
+    int windowWidth= WINDOW_WIDTH;
+    int windowHeight= WINDOW_HEIGHT;
+    Uint32 windowFlags= SDL_WINDOW_SHOWN;
+    Uint32 rendererFlags= SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC;
+    if(!init(&window, title, windowWidth, windowHeight, windowFlags, &renderer, rendererFlags)){
         exit(1);
     }
-    SDL_Window *window = SDL_CreateWindow("Pong", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-            WIDTH, HEIGHT, SDL_WINDOW_SHOWN);
-    
-    SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-    SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
-    /* Issue draw command */
+    /* Create game objects */
+
+    /* Event loop */
+    SDL_Event event;
+    bool quit = false;
+    Uint32 lastTick = SDL_GetTicks();
+    Uint32 currentTick = 0;
+    Uint32 diff = 0;
+    float elapsed = 0;
+    while(!quit){
+        while(SDL_PollEvent(&event)){
+            if(event.type == SDL_QUIT){
+                quit = true;
+            }
+        }
+        currentTick = SDL_GetTicks();
+        diff = currentTick - lastTick;
+        elapsed = diff / 1000.0f;
+        lastTick = SDL_GetTicks();
+    }
+    return 0;
+}
+
+void update(float elapsed){
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderClear(renderer);
+
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     /* Swap the background buffer with the front one */
     SDL_RenderPresent(renderer);
+}
 
-    SDL_Event event;
-    while(SDL_WaitEvent(&event))
-    {
-        if(event.type == SDL_QUIT){
-            break;
-        }
-
-
-    }
-    SDL_Quit();
+Ball makeBall(int size)
+{
+    const float speed = 120;
+    Ball ball = {
+        .x = WINDOW_WIDTH/2 - size/2,
+        .y = WINDOW_HEIGHT/2 - size/2,
+        .size = 10,
+    };
 }

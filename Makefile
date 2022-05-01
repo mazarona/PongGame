@@ -1,2 +1,2 @@
 build:
-	gcc -o myprogram main.c `sdl2-config --cflags --libs`
+	gcc -g -o myprogram *.c `sdl2-config --cflags --libs`

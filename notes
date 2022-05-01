@@ -1,0 +1,14 @@
+1) Make the ball (initialize its struct)
+2) Update the ball
+3) Render the ball
+
+GameObjects.c
+    makeCircle
+    makeRectangle
+    makeTriangle
+    makeLine
+    makeBall
+    NOTE: Each object will have-besides x y size speed attributes- a pointer to its update function set by the user of my lib
+GameLoop.c
+    Draw all of the objects
+    void startGame(void);
