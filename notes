@@ -14,3 +14,5 @@ GameLoop.c
     void startGame(void);
 
 
+TODO:
+    -> Use an appropriate datastructure instead of linked lists to keep track of my non-homogeneous game objects.
