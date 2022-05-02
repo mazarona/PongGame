@@ -2,6 +2,7 @@
 #include <stdbool.h>
 #include "../include/LinkedList.h"
 #include "../include/GameObjects.h"
+#include "../include/GamePhysics.h"
 
 extern List squares;
 extern SDL_Renderer *rendererGlobal;
@@ -10,6 +11,9 @@ void update(float elapsed)
     // Iterate over all the squares inside the linked list and call their update function set by the user
     for(List_elmt *temp = squares.head; temp != NULL; ){
         Square *square = ((Square *)temp->data);
+        if(square->physics){
+            applyGeneralPhysics(square, elapsed);
+        }
         square->update(square, elapsed);
         temp = temp->next;
     }

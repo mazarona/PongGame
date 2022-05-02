@@ -14,13 +14,17 @@ typedef struct Line{
 typedef struct Square{
     float x;
     float y;
-    int size;
     float xSpeed;
     float ySpeed;
+    float xForce;
+    float yForce;
+    int size;
+    float mass;
     int red;
     int green;
     int blue;
     int alpha;
+    bool physics;
     void (*update)(struct Square *, float elapsedTime);
 }Square;
 
@@ -33,7 +37,7 @@ typedef struct Rectangle{
     float ySpeed;
 }Rectangle;
 
-void createSquare(float x, float y, int size, float xSpeed, float ySpeed,
-        int red, int green, int blue, int alpha, void(*update)(struct Square*, float elapsed));
+void createSquare(float x, float y, int size, float xSpeed, float ySpeed, float mass,
+        int red, int green, int blue, int alpha, bool physics,void(*update)(struct Square*, float elapsed));
 
 #endif

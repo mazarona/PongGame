@@ -7,8 +7,8 @@
 List squares;
 static void destroySquares(void *data){free((Square *) data);}
 
-void createSquare(float x, float y, int size, float xSpeed, float ySpeed,
-        int red, int green, int blue, int alpha, void(*update)(struct Square*, float elapsed))
+void createSquare(float x, float y, int size, float xSpeed, float ySpeed, float mass,
+        int red, int green, int blue, int alpha, bool physics ,void(*update)(struct Square*, float elapsed))
 {
     // Initialize the linked list only once
     static bool initialize = false;
@@ -26,12 +26,16 @@ void createSquare(float x, float y, int size, float xSpeed, float ySpeed,
     sq->x = x;
     sq->y = y;
     sq->size = size;
+    sq->mass = mass;
+    sq->xForce = 0;
+    sq->yForce = 0;
     sq->xSpeed = xSpeed;
     sq->ySpeed = ySpeed;
     sq->red = red;
     sq->green = green;
     sq->blue = blue;
     sq->alpha = alpha;
+    sq->physics = physics;
     sq->update = update;
     list_ins_next(&squares, NULL, sq);
 }
