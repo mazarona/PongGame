@@ -20,6 +20,10 @@ static void shutDown(void){
         list_destroy(&lines);
     }
 
+    if(lines.size != 0){
+        list_destroy(&polygons);
+    }
+
     SDL_Quit();
 }
 
