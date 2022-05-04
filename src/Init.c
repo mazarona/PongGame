@@ -16,6 +16,9 @@ static void shutDown(void){
     if(rectangles.size != 0){
         list_destroy(&rectangles);
     }
+    if(lines.size != 0){
+        list_destroy(&lines);
+    }
 
     SDL_Quit();
 }

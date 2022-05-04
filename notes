@@ -3,10 +3,10 @@
 3) Render the ball (by calling the renderer fill rect command)
 
 GameObjects.c
-    makeCircle
-    makeRectangle
-    makeTriangle
     makeLine
+    makeRectangle
+    makeCircle
+    makeTriangle
     makeBall
     NOTE: Each object will have-besides x y size speed attributes- a pointer to its update function set by the user of my lib
 GameLoop.c
@@ -21,6 +21,8 @@ TODO:
     -> Implement a circle object
     -> Implement a general Polygon object
     -> Implement Rotation.
+    -> Collision detection
+    -> Error handling on use inputs to create function (Especially passing zeros);
 
 NOTES:
     -> The linked list is defined in GameObjects.c (makes sense)

@@ -5,13 +5,13 @@
 
 //void createRandSquares(unsigned n);
 
-const unsigned windowWidth= 640;
-const unsigned windowHeight= 480;
 //void updateSquare(Square *sq, float elapsed);
 int main(int argc, const char *argv[]) {
     /***** Initialization (window and renderer) ******/
     SDL_Window *window;
     SDL_Renderer *renderer;
+    const unsigned windowWidth= 640;
+    const unsigned windowHeight= 480;
     const char *title= "Pong";
     Uint32 windowFlags= SDL_WINDOW_SHOWN;
     Uint32 rendererFlags= SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC;
@@ -21,9 +21,14 @@ int main(int argc, const char *argv[]) {
 
     /***** Create game objects *****/
 
-    createSquare(200, 100, 40, 0, 200, 5, 2000, 20000, 255, 0, 0, 255, true, NULL);
-    int thick = 5;
-    createLine(0, 0, windowWidth, windowHeight,thick, 0, 0, 1,0,0, 255, 0, 0, 255, true, NULL);
+    //createSquare(200, 100, 40, 0, 200, 5, 2000, 20000, 255, 0, 0, 255, true, NULL);
+    //int thick = 5;
+    //createLine(0, 0, windowWidth, windowHeight,thick, 0, 0, 1,0,0, 255, 0, 0, 255, true, NULL);
+
+    unsigned numberOfSides1 = 10;
+    unsigned numberOfSides2 = 6;
+    createPolygon(windowWidth/1.5, windowHeight/2, numberOfSides1, 50, 1, 1, 0, 0, 0, 0, 0, 255, 0, 255, false, NULL);
+    createPolygon(windowWidth/3, windowHeight/2, numberOfSides2, 50, 1, 1, 0, 0, 0, 0, 0, 255, 0, 255, false, NULL);
     //createRandSquares(10);
 
     /***** Start the Game *****/

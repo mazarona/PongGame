@@ -1,14 +1,16 @@
 #include <stdlib.h>
+#include <math.h>
 #include <stdbool.h>
 #include "../include/LinkedList.h"
 #include "../include/GameObjects.h"
 
 /* Keep track of created game objects in a linked list*/
 List rectangles;
-List lines;
+List lines; List polygons;
 
 static void destroyRectangles(void *data){free((Rectangle *) data);}
 static void destroyLines(void *data){free((Line *) data);}
+static void destroyPolygons(void *data){free((Polygon *) data);}
 void createSquare(float x, float y, int size, float xSpeed, float ySpeed, float mass, float xForce, float yForce,
         int red, int green, int blue, int alpha, bool physics ,void(*update)(struct Rectangle*, float elapsed))
 {
@@ -72,4 +74,34 @@ void createLine(float x1, float y1, float x2, float y2, int thickness, float xSp
     line->physics = physics;
     line->update = update;
     list_ins_next(&lines, NULL, line);
+}
+
+void createPolygon(float x, float y, unsigned numberOfSides, float sideLength, float sideScale, float mass, float xSpeed, float ySpeed, float xForce, float yForce,
+        int red, int green, int blue, int alpha, bool physics ,void(*update)(struct Polygon*, float elapsed))
+{
+    // Initialize the linked list only once
+    static bool initialize = false;
+    if(!initialize){
+        list_init(&polygons, destroyPolygons);
+        initialize = true;
+    }
+    Polygon *polygon = (Polygon *)malloc(sizeof(Polygon));
+    polygon->x = x;
+    polygon->y = y;
+    polygon-> numberOfSides = numberOfSides;
+    polygon->sideLength = sideLength;
+    polygon->sideScale = sideScale;
+    polygon->radius = (sideLength*sideScale) / (2* sin(M_PI/numberOfSides));
+    polygon->mass = mass;
+    polygon->xSpeed = xSpeed;
+    polygon->ySpeed = ySpeed;
+    polygon->xForce = xForce;
+    polygon->yForce = yForce + ((physics)? 9.8 : 0);
+    polygon->red = red;
+    polygon->green = green;
+    polygon->blue = blue;
+    polygon->alpha = alpha;
+    polygon->physics = physics;
+    polygon->update = update;
+    list_ins_next(&polygons, NULL, polygon);
 }

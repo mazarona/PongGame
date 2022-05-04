@@ -10,5 +10,6 @@ extern SDL_Window *windowGlobal;
 // Defined in GameObjects.c
 extern List lines;
 extern List rectangles;
+extern List polygons;
 
 #endif
