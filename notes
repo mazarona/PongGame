@@ -16,7 +16,11 @@ GameLoop.c
 
 TODO:
     -> Use an appropriate datastructure instead of linked lists to keep track of my non-homogeneous game objects.
-    -> Implement a new vector2D  datatype to hold position, velocity and force.
+        I can just initailize a new list for each object... I think this will be easier to keep track of my game objects.
+    -> Implement a new vector2D  datatype to hold position, scaling, velocity and force.
+    -> Implement a circle object
+    -> Implement a general Polygon object
+    -> Implement Rotation.
 
 NOTES:
     -> The linked list is defined in GameObjects.c (makes sense)

@@ -3,5 +3,6 @@
 #include "GameObjects.h"
 
 void applyPhysics(Rectangle *square, float elapsed);
+void update(float elapsed);
 
 #endif

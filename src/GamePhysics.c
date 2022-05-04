@@ -2,6 +2,7 @@
 #include <stdbool.h>
 #include "../include/LinkedList.h"
 #include "../include/GameObjects.h"
+#include "../include/globals.h"
 
 void applyPhysics(Rectangle *rectangle, float elapsed){
     if((rectangle->x) < (rectangle->width/2)){
@@ -17,9 +18,22 @@ void applyPhysics(Rectangle *rectangle, float elapsed){
         //rectangle->ySpeed = -abs((int)rectangle->ySpeed);
         rectangle->ySpeed =0;
     }
+    // Dynamics (Newton laws)
     rectangle->xSpeed += rectangle->xForce / rectangle-> mass * elapsed;
     rectangle->x += rectangle->xSpeed * elapsed;
-    if((rectangle->y) < (480 - rectangle->height/2))
-        rectangle->ySpeed += rectangle->yForce / rectangle-> mass * elapsed;
+    rectangle->ySpeed += rectangle->yForce / rectangle-> mass * elapsed;
     rectangle->y += rectangle->ySpeed * elapsed;
+}
+
+void update(float elapsed)
+{
+    // Iterate over all the rectangles inside the linked list.
+    for(List_elmt *temp = rectangles.head; temp != NULL; ){
+        Rectangle *rectangle = ((Rectangle *)temp->data);
+        applyPhysics(rectangle, elapsed);
+        // call back the user defined update function if not NULL.
+        if(rectangle-> update != NULL)
+            rectangle->update(rectangle, elapsed);
+        temp = temp->next;
+    }
 }

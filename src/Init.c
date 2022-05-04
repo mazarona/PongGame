@@ -2,8 +2,8 @@
 #include <stdbool.h>
 #include <time.h>
 #include "../include/LinkedList.h"
+#include "../include/globals.h"
 
-extern List rectangles;
 SDL_Window *windowGlobal = NULL;
 SDL_Renderer *rendererGlobal = NULL;
 static void shutDown(void){
