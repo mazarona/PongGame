@@ -20,7 +20,10 @@ int main(int argc, const char *argv[]) {
     }
 
     /***** Create game objects *****/
+
     createSquare(200, 100, 40, 0, 200, 5, 2000, 20000, 255, 0, 0, 255, true, NULL);
+    int thick = 5;
+    createLine(0, 0, windowWidth, windowHeight,thick, 0, 0, 1,0,0, 255, 0, 0, 255, true, NULL);
     //createRandSquares(10);
 
     /***** Start the Game *****/

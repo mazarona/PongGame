@@ -27,7 +27,12 @@ void drawLines(void)
         SDL_Point point1 = {line->x1, line->y1};
         SDL_Point point2 = {line->x2, line->y2};
         SDL_SetRenderDrawColor(rendererGlobal, line->red, line->green, line->blue, line->alpha);
-        SDL_RenderDrawLineF(rendererGlobal, point1.x, point1.y, point2.x,point2.y);
+        for(int i =0; i < line->thickness; i++)
+        {
+            SDL_RenderDrawLineF(rendererGlobal, point1.x, point1.y, point2.x,point2.y);
+            point1.x += 1;
+            point2.x += 1;
+        }
         temp = temp->next;
     }
 }
