@@ -2,6 +2,6 @@
 #define GAME_PHYSICS_H
 #include "GameObjects.h"
 
-void applyGeneralPhysics(Square *square, float elapsed);
+void applyPhysics(Rectangle *square, float elapsed);
 
 #endif

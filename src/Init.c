@@ -3,18 +3,18 @@
 #include <time.h>
 #include "../include/LinkedList.h"
 
-extern List squares;
-static SDL_Window *windowHelper = NULL;
+extern List rectangles;
+SDL_Window *windowGlobal = NULL;
 SDL_Renderer *rendererGlobal = NULL;
 static void shutDown(void){
     if(rendererGlobal){
         SDL_DestroyRenderer(rendererGlobal);
     }
-    if(windowHelper){
-        SDL_DestroyWindow(windowHelper);
+    if(windowGlobal){
+        SDL_DestroyWindow(windowGlobal);
     }
-    if(squares.size != 0){
-        list_destroy(&squares);
+    if(rectangles.size != 0){
+        list_destroy(&rectangles);
     }
 
     SDL_Quit();
@@ -37,7 +37,7 @@ bool init(SDL_Window **window,const char *title, int w, int h, Uint32 windowFlag
     if(!window){
         return false;
     }
-    windowHelper = *window;
+    windowGlobal = *window;
 
     // Create renderer
     *renderer = SDL_CreateRenderer(*window, -1, rendererFlags);

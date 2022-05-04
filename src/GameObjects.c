@@ -4,16 +4,16 @@
 #include "../include/GameObjects.h"
 
 /* Keep track of created game objects in a linked list*/
-List squares;
-static void destroySquares(void *data){free((Square *) data);}
+List rectangles;
 
-void createSquare(float x, float y, int size, float xSpeed, float ySpeed, float mass,
-        int red, int green, int blue, int alpha, bool physics ,void(*update)(struct Square*, float elapsed))
+static void destroyRectangles(void *data){free((Rectangle *) data);}
+void createSquare(float x, float y, int size, float xSpeed, float ySpeed, float mass, float xForce, float yForce,
+        int red, int green, int blue, int alpha, bool physics ,void(*update)(struct Rectangle*, float elapsed))
 {
     // Initialize the linked list only once
     static bool initialize = false;
     if(!initialize){
-        list_init(&squares, destroySquares);
+        list_init(&rectangles, destroyRectangles);
         initialize = true;
     }
 
@@ -22,13 +22,16 @@ void createSquare(float x, float y, int size, float xSpeed, float ySpeed, float 
     //  1) shutDown function will destroy all of the linked list
     //  2) when removing an element from the linked list it will free it using the
     //      provided destry function above
-    Square *sq = (Square *)malloc(sizeof(Square));
+    Rectangle *sq = (Rectangle *)malloc(sizeof(Rectangle));
     sq->x = x;
     sq->y = y;
-    sq->size = size;
+    sq->width = size;
+    sq->height = size;
     sq->mass = mass;
-    sq->xForce = 0;
-    sq->yForce = 0;
+    sq->widthScale = 1;
+    sq->heightScale = 1;
+    sq->xForce = xForce;
+    sq->yForce = yForce + ((physics)? 9.8 : 0);
     sq->xSpeed = xSpeed;
     sq->ySpeed = ySpeed;
     sq->red = red;
@@ -37,6 +40,6 @@ void createSquare(float x, float y, int size, float xSpeed, float ySpeed, float 
     sq->alpha = alpha;
     sq->physics = physics;
     sq->update = update;
-    list_ins_next(&squares, NULL, sq);
+    list_ins_next(&rectangles, NULL, sq);
 }
 
