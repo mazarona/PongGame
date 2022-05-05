@@ -19,10 +19,13 @@ TODO:
         I can just initailize a new list for each object... I think this will be easier to keep track of my game objects.
     -> Implement a new vector2D  datatype to hold position, scaling, velocity and force.
     -> Implement a circle object
+        rn I can create a decent circle using polygons with numberOfSides >= 25.
     -> Implement a general Polygon object
     -> Implement Rotation.
     -> Collision detection
+        SDL provides a simple rect object detection that will suffice for pong game.
     -> Error handling on use inputs to create function (Especially passing zeros);
+    -> implement HandleEvents.c
 
 NOTES:
     -> The linked list is defined in GameObjects.c (makes sense)

@@ -23,16 +23,10 @@ void drawLines(void)
 
 void drawRectangles(void)
 {
-    for(List_elmt *temp = rectangles.head; temp != NULL; ){ Rectangle*rectangle = ((Rectangle *)temp->data);
-        // The x and y members inside the rectangle struct are the center of the rect
-        SDL_Rect rect ={
-            .x = rectangle->x - (rectangle->width)/2,
-            .y = rectangle->y - (rectangle->height)/2,
-            .w = rectangle->width * rectangle->widthScale,
-            .h = rectangle->height * rectangle->heightScale,
-        };
+    for(List_elmt *temp = rectangles.head; temp != NULL; ){ 
+        Rectangle*rectangle = ((Rectangle *)temp->data);
         SDL_SetRenderDrawColor(rendererGlobal, rectangle->red, rectangle->green, rectangle->blue, rectangle->alpha);
-        SDL_RenderFillRect(rendererGlobal, &rect);
+        SDL_RenderFillRect(rendererGlobal, &(rectangle->rect));
         temp = temp->next;
     }
 }
@@ -61,7 +55,6 @@ void drawPolygons(void)
                 point2.y = polygon->y;
             }
             SDL_RenderDrawLineF(rendererGlobal, point1.x, point1.y, point2.x,point2.y);
-
         }
         temp = temp->next;
     }

@@ -3,9 +3,6 @@
 #include "../include/GameObjects.h"
 #include "../include/GameLoop.h"
 
-//void createRandSquares(unsigned n);
-
-//void updateSquare(Square *sq, float elapsed);
 int main(int argc, const char *argv[]) {
     /***** Initialization (window and renderer) ******/
     SDL_Window *window;
@@ -20,44 +17,20 @@ int main(int argc, const char *argv[]) {
     }
 
     /***** Create game objects *****/
+    int player1ID=0;
+    int player2ID=1;
+    int ballID=2;
 
-    //createSquare(200, 100, 40, 0, 200, 5, 2000, 20000, 255, 0, 0, 255, true, NULL);
-    //int thick = 5;
-    //createLine(0, 0, windowWidth, windowHeight,thick, 0, 0, 1,0,0, 255, 0, 0, 255, true, NULL);
-
-    unsigned numberOfSides1 = 10;
-    unsigned numberOfSides2 = 6;
-    createPolygon(windowWidth/1.5, windowHeight/2, numberOfSides1, 50, 1, 1, 0, 0, 0, 0, 0, 255, 0, 255, false, NULL);
-    createPolygon(windowWidth/3, windowHeight/2, numberOfSides2, 50, 1, 1, 0, 0, 0, 0, 0, 255, 0, 255, false, NULL);
-    //createRandSquares(10);
+    //create players
+    createRectangle(player1ID, windowWidth * 0.1, windowHeight/2, 5, windowHeight * 0.1, 1, 0, 0, 0, 0, 255, 0, 0, 255, false, NULL);
+    createRectangle(player2ID, windowWidth * 0.9, windowHeight/2, 5, windowHeight * 0.1, 1, 0, 0, 0, 0, 255, 0, 0, 255, false, NULL);
+    //create ball
+    const float ballSize = 10;
+    const float ballSpeedX = 200;
+    const float ballSpeedY = 200;
+    createRectangle(ballID, windowWidth/ 2, windowHeight/2, ballSize, ballSize, 1, ballSpeedX, ballSpeedY, 0, 0, 255, 0, 0, 255, false, NULL);
 
     /***** Start the Game *****/
     startGame();
     return 0;
 }
-
-//void updateSquare(Square *sq, float elapsed){
-//    sq->x += sq->xSpeed * elapsed;
-//    if((sq->x) < (sq->size/2)){
-//        sq->xSpeed = abs((int)sq->xSpeed);
-//    }
-//    if((sq->x) > (windowWidth - sq->size/2)){
-//        sq->xSpeed = -abs((int)sq->xSpeed);
-//    }
-//    if((sq->y) < (sq->size/2)){
-//        sq->ySpeed = abs((int)sq->ySpeed);
-//    }
-//    if((sq->y) > (windowHeight - sq->size/2)){
-//        sq->ySpeed = -abs((int)sq->ySpeed);
-//    }
-//}
-
-//void createRandSquares(unsigned n)
-//{
-//    for(unsigned i = 0; i < n; i++){
-//        createSquare(rand()%400, rand()%400,rand()%100 + 1,rand()%100,
-//                rand()%100, rand()%10 + 1, rand()%256, rand()%256, rand()%256,
-//                rand()%256,true,NULL);
-//    }
-//
-//}

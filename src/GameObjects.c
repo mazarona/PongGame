@@ -11,8 +11,8 @@ List lines; List polygons;
 static void destroyRectangles(void *data){free((Rectangle *) data);}
 static void destroyLines(void *data){free((Line *) data);}
 static void destroyPolygons(void *data){free((Polygon *) data);}
-void createSquare(float x, float y, int size, float xSpeed, float ySpeed, float mass, float xForce, float yForce,
-        int red, int green, int blue, int alpha, bool physics ,void(*update)(struct Rectangle*, float elapsed))
+void createRectangle(int id, float x, float y,  float width, float height, float mass, float xSpeed, float ySpeed, float xForce, float yForce,
+        int red, int green, int blue, int alpha, bool gravity ,void(*update)(struct Rectangle*, float elapsed))
 {
     // Initialize the linked list only once
     static bool initialize = false;
@@ -27,28 +27,33 @@ void createSquare(float x, float y, int size, float xSpeed, float ySpeed, float 
     //  2) when removing an element from the linked list it will free it using the
     //      provided destroy function above
     Rectangle *sq = (Rectangle *)malloc(sizeof(Rectangle));
+    sq->id = id;
     sq->x = x;
     sq->y = y;
-    sq->width = size;
-    sq->height = size;
+    sq->width = width;
+    sq->height = height;
     sq->mass = mass;
     sq->widthScale = 1;
     sq->heightScale = 1;
     sq->xForce = xForce;
-    sq->yForce = yForce + ((physics)? 9.8 : 0);
+    sq->yForce = yForce + ((gravity)? 9.8 : 0);
     sq->xSpeed = xSpeed;
     sq->ySpeed = ySpeed;
     sq->red = red;
     sq->green = green;
     sq->blue = blue;
     sq->alpha = alpha;
-    sq->physics = physics;
+    sq->gravity = gravity;
     sq->update = update;
+    sq->rect.x = sq->x - (sq->width)/2;
+    sq->rect.y = sq->y - (sq->height)/2;
+    sq->rect.w = sq->width * sq->widthScale;
+    sq->rect.h = sq->height * sq->heightScale;
     list_ins_next(&rectangles, NULL, sq);
 }
 
 void createLine(float x1, float y1, float x2, float y2, int thickness, float xSpeed, float ySpeed, float mass, float xForce, float yForce,
-        int red, int green, int blue, int alpha, bool physics ,void(*update)(struct Line*, float elapsed))
+        int red, int green, int blue, int alpha, bool gravity ,void(*update)(struct Line*, float elapsed))
 {
     // Initialize the linked list only once
     static bool initialize = false;
@@ -65,19 +70,19 @@ void createLine(float x1, float y1, float x2, float y2, int thickness, float xSp
     line->xSpeed = xSpeed;
     line->ySpeed = ySpeed;
     line->xForce = xForce;
-    line->yForce = yForce + ((physics)? 9.8 : 0);
+    line->yForce = yForce + ((gravity)? 9.8 : 0);
     line->mass = mass;
     line->red = red;
     line->green = green;
     line->blue = blue;
     line->alpha = alpha;
-    line->physics = physics;
+    line->gravity = gravity;
     line->update = update;
     list_ins_next(&lines, NULL, line);
 }
 
 void createPolygon(float x, float y, unsigned numberOfSides, float sideLength, float sideScale, float mass, float xSpeed, float ySpeed, float xForce, float yForce,
-        int red, int green, int blue, int alpha, bool physics ,void(*update)(struct Polygon*, float elapsed))
+        int red, int green, int blue, int alpha, bool gravity ,void(*update)(struct Polygon*, float elapsed))
 {
     // Initialize the linked list only once
     static bool initialize = false;
@@ -96,12 +101,12 @@ void createPolygon(float x, float y, unsigned numberOfSides, float sideLength, f
     polygon->xSpeed = xSpeed;
     polygon->ySpeed = ySpeed;
     polygon->xForce = xForce;
-    polygon->yForce = yForce + ((physics)? 9.8 : 0);
+    polygon->yForce = yForce + ((gravity)? 9.8 : 0);
     polygon->red = red;
     polygon->green = green;
     polygon->blue = blue;
     polygon->alpha = alpha;
-    polygon->physics = physics;
+    polygon->gravity = gravity;
     polygon->update = update;
     list_ins_next(&polygons, NULL, polygon);
 }
