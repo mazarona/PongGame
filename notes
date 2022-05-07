@@ -26,6 +26,8 @@ TODO:
         SDL provides a simple rect object detection that will suffice for pong game.
     -> Error handling on use inputs to create function (Especially passing zeros);
     -> implement HandleEvents.c
+    -> Implement scores
+    -> Add sound
 
 NOTES:
     -> The linked list is defined in GameObjects.c (makes sense)

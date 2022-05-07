@@ -5,26 +5,16 @@
 #include "../include/globals.h"
 
 void applyPhysics(Rectangle *rectangle, float elapsed){
-    // Iterate over all of the objects then find the ball then find the collision
-    for(List_elmt *temp = rectangles.head; temp != NULL; ){
-        Rectangle *rectangle2 = ((Rectangle *)temp->data);
-        if(rectangle != rectangle2 && rectangle2->width == rectangle2->height){
-            if(SDL_HasIntersection(&(rectangle->rect), &(rectangle2->rect)) == SDL_TRUE){
-                rectangle2->xSpeed = -rectangle2->xSpeed;
-            }
-        }
-        temp = temp->next;
-    }
     if((rectangle->x) < (rectangle->width/2)){
         rectangle->xSpeed = abs((int)rectangle->xSpeed);
     }
-    if((rectangle->x) > (640 - rectangle->width/2)){
+    if((rectangle->x) > (windowGlobal.windowWidth - rectangle->width/2)){
         rectangle->xSpeed = -abs((int)rectangle->xSpeed);
     }
     if((rectangle->y) < (rectangle->height/2)){
         rectangle->ySpeed = abs((int)rectangle->ySpeed);
     }
-    if((rectangle->y) > (480 - rectangle->height/2)){
+    if((rectangle->y) > (windowGlobal.windowHeight - rectangle->height/2)){
         rectangle->ySpeed = -abs((int)rectangle->ySpeed);
     }
     // Dynamics (Newton laws)

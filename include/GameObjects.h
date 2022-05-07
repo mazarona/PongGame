@@ -64,7 +64,7 @@ typedef struct Polygon{
     void (*update)(struct Polygon *, float elapsedTime);
 }Polygon;
 
-void createRectangle(int id, float x, float y,  float width, float height, float mass, float xSpeed, float ySpeed, float xForce, float yForce,
+Rectangle *createRectangle(int id, float x, float y,  float width, float height, float mass, float xSpeed, float ySpeed, float xForce, float yForce,
         int red, int green, int blue, int alpha, bool gravity ,void(*update)(struct Rectangle*, float elapsed));
 void createLine(float x1, float y1, float x2, float y2, int thickness, float xSpeed, float ySpeed, float mass, float xForce, float yForce,
         int red, int green, int blue, int alpha, bool gravity ,void(*update)(struct Line*, float elapsed));

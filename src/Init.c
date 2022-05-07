@@ -4,14 +4,14 @@
 #include "../include/LinkedList.h"
 #include "../include/globals.h"
 
-SDL_Window *windowGlobal = NULL;
+WindowGlobal windowGlobal;
 SDL_Renderer *rendererGlobal = NULL;
 static void shutDown(void){
     if(rendererGlobal){
         SDL_DestroyRenderer(rendererGlobal);
     }
-    if(windowGlobal){
-        SDL_DestroyWindow(windowGlobal);
+    if(windowGlobal.window){
+        SDL_DestroyWindow(windowGlobal.window);
     }
     if(rectangles.size != 0){
         list_destroy(&rectangles);
@@ -44,7 +44,9 @@ bool init(SDL_Window **window,const char *title, int w, int h, Uint32 windowFlag
     if(!window){
         return false;
     }
-    windowGlobal = *window;
+    windowGlobal.window = *window;
+    windowGlobal.windowWidth = w;
+    windowGlobal.windowHeight = h;
 
     // Create renderer
     *renderer = SDL_CreateRenderer(*window, -1, rendererFlags);

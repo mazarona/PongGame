@@ -11,7 +11,7 @@ List lines; List polygons;
 static void destroyRectangles(void *data){free((Rectangle *) data);}
 static void destroyLines(void *data){free((Line *) data);}
 static void destroyPolygons(void *data){free((Polygon *) data);}
-void createRectangle(int id, float x, float y,  float width, float height, float mass, float xSpeed, float ySpeed, float xForce, float yForce,
+Rectangle *createRectangle(int id, float x, float y,  float width, float height, float mass, float xSpeed, float ySpeed, float xForce, float yForce,
         int red, int green, int blue, int alpha, bool gravity ,void(*update)(struct Rectangle*, float elapsed))
 {
     // Initialize the linked list only once
@@ -26,30 +26,31 @@ void createRectangle(int id, float x, float y,  float width, float height, float
     //  1) shutDown function will destroy all of the linked list
     //  2) when removing an element from the linked list it will free it using the
     //      provided destroy function above
-    Rectangle *sq = (Rectangle *)malloc(sizeof(Rectangle));
-    sq->id = id;
-    sq->x = x;
-    sq->y = y;
-    sq->width = width;
-    sq->height = height;
-    sq->mass = mass;
-    sq->widthScale = 1;
-    sq->heightScale = 1;
-    sq->xForce = xForce;
-    sq->yForce = yForce + ((gravity)? 9.8 : 0);
-    sq->xSpeed = xSpeed;
-    sq->ySpeed = ySpeed;
-    sq->red = red;
-    sq->green = green;
-    sq->blue = blue;
-    sq->alpha = alpha;
-    sq->gravity = gravity;
-    sq->update = update;
-    sq->rect.x = sq->x - (sq->width)/2;
-    sq->rect.y = sq->y - (sq->height)/2;
-    sq->rect.w = sq->width * sq->widthScale;
-    sq->rect.h = sq->height * sq->heightScale;
-    list_ins_next(&rectangles, NULL, sq);
+    Rectangle *rectangle = (Rectangle *)malloc(sizeof(Rectangle));
+    rectangle->id = id;
+    rectangle->x = x;
+    rectangle->y = y;
+    rectangle->width = width;
+    rectangle->height = height;
+    rectangle->mass = mass;
+    rectangle->widthScale = 1;
+    rectangle->heightScale = 1;
+    rectangle->xForce = xForce;
+    rectangle->yForce = yForce + ((gravity)? 9.8 : 0);
+    rectangle->xSpeed = xSpeed;
+    rectangle->ySpeed = ySpeed;
+    rectangle->red = red;
+    rectangle->green = green;
+    rectangle->blue = blue;
+    rectangle->alpha = alpha;
+    rectangle->gravity = gravity;
+    rectangle->update = update;
+    rectangle->rect.x = rectangle->x - (rectangle->width)/2;
+    rectangle->rect.y = rectangle->y - (rectangle->height)/2;
+    rectangle->rect.w = rectangle->width * rectangle->widthScale;
+    rectangle->rect.h = rectangle->height * rectangle->heightScale;
+    list_ins_next(&rectangles, NULL, rectangle);
+    return rectangle;
 }
 
 void createLine(float x1, float y1, float x2, float y2, int thickness, float xSpeed, float ySpeed, float mass, float xForce, float yForce,
